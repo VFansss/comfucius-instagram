@@ -4,7 +4,7 @@ import pprint
 import os
 import random
 from instagrapi import Client
-from datetime import datetime, timezone
+from datetime import datetime
 from image_generator.generate_image import generate_image
 
 DRY_RUN_ENABLED=True
@@ -41,7 +41,7 @@ def get_instagram_post_caption(good_word_limit, bad_word_limit):
     for single_row in output_obj.fetchall():
         hashtags_good.append('#'+single_row[0])
 
-    return (f'{" ".join(hashtags_good)} {" ".join(hashtags_bad)}')
+    return (f'{" ".join(hashtags_good)}{" ".join(hashtags_bad)}')
 
 def post_photo_on_instagram(image_path, post_caption, accessibility_caption):
     '''
@@ -102,15 +102,15 @@ if __name__ == "__main__":
     # Post on Instagram, if "DRY_RUN_ENABLED" is True
 
     post_result_info = post_photo_on_instagram(
-        image_path="generated-image.jpg", # TODO: use real variable
+        image_path=generated_image_path,
         post_caption=generated_post_caption,
         accessibility_caption=comfucius_complete_quote
     )
 
     print(f"Post done! Date: {datetime.now()}")
 
-    # Delete the used .jpg photo, if "DRY_RUN_ENABLED" is True
+    # Delete the used .jpg photo, if "DRY_RUN_ENABLED" is False
 
-    # TODO:
+    if DRY_RUN_ENABLED is False:
 
-
+        os.remove(generated_image_path)

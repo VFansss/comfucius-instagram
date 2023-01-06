@@ -68,4 +68,7 @@ def generate_image(path_background_image, generated_image_directory, generated_i
     draw.text((background_image.width/2, bottom+40),"\n\n~ "+author, align="center", anchor="mm", font=ImageFont.truetype(font_path_for_author, int(fontsize/2)), fill=(255, 255, 255))
 
     # Salva l'immagine
-    background_image.convert('RGB').save(generated_image_directory + os.sep + generated_image_filename_no_extension +".jpg")
+    saved_background_imagepath = generated_image_directory + os.sep + generated_image_filename_no_extension +".jpg"
+    background_image.convert('RGB').save(saved_background_imagepath)
+
+    return saved_background_imagepath
