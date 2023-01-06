@@ -4,3 +4,6 @@ sqlite3.exe
 # Avoid syncing any SQLite database. You need one for your application
 # but create it from "flat_file_database.csv". Check instruction within.
 *.sqlite
+
+# No love for pycache
+*/__pycache__
