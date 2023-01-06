@@ -1,0 +1,6 @@
+# Yes, I've copied windows SQLite inside the project. Don't do that!
+sqlite3.exe
+
+# Avoid syncing any SQLite database. You need one for your application
+# but create it from "flat_file_database.csv". Check instruction within.
+*.sqlite
