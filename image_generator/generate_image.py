@@ -45,6 +45,22 @@ def generate_image(path_background_image, generated_image_directory, generated_i
     draw.line([border_bottom_right_angle,border_top_right_angle],border_fill,border_width)
     draw.line([border_top_right_angle,border_top_left_angle],border_fill,border_width)
 
+    # Add a mini logo within borders
+
+    logo_image = Image.open('logo.png')
+
+    # Anchor using top-right image cordinate
+
+    (logo_width, logo_height) = logo_image.size;
+    
+    logo_margin = 40
+    logo_x_cord = int((bg_width/2)-(logo_width/2))
+    logo_y_cord = int(border_top_left_angle[1]) + logo_margin
+
+    logo_coordinates = (logo_x_cord,logo_y_cord)
+
+    background_image.paste(logo_image, logo_coordinates, mask=logo_image)
+
     # Converti tutto in maiuscolo, e divide la frase motivazionale in due parti
     phrase, author = text_to_use.upper().split(" ~ ")
 
