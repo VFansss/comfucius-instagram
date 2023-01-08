@@ -23,6 +23,28 @@ def generate_image(path_background_image, generated_image_directory, generated_i
     # Crea un oggetto draw per disegnare sull'immagine
     draw = ImageDraw.Draw(background_image)
 
+    # Disegna un bordo attorno all'immagine.
+
+    (bg_width, bg_height) = background_image.size;
+
+    space_multiplier = 0.05
+
+    border_horiz_margin = bg_width * space_multiplier
+    border_vert_margin = bg_height * space_multiplier
+
+    border_top_left_angle = (border_horiz_margin,border_vert_margin)
+    border_bottom_left_angle = (border_horiz_margin, bg_height-border_vert_margin)
+    border_bottom_right_angle = (bg_width-border_horiz_margin, bg_height-border_vert_margin)
+    border_top_right_angle = (bg_width-border_horiz_margin,border_vert_margin)
+
+    border_fill = (255,255,255)
+    border_width = 5
+
+    draw.line([border_top_left_angle,border_bottom_left_angle],border_fill,border_width)
+    draw.line([border_bottom_left_angle,border_bottom_right_angle],border_fill,border_width)
+    draw.line([border_bottom_right_angle,border_top_right_angle],border_fill,border_width)
+    draw.line([border_top_right_angle,border_top_left_angle],border_fill,border_width)
+
     # Converti tutto in maiuscolo, e divide la frase motivazionale in due parti
     phrase, author = text_to_use.upper().split(" ~ ")
 
