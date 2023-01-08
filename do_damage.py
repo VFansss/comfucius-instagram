@@ -18,7 +18,7 @@ INSTAGRAM_USERNAME=os.environ.get('INSTAGRAM_USERNAME')
 INSTAGRAM_PASSWORD=os.environ.get('INSTAGRAM_PASSWORD')
 
 INSTAGRAM_POST_GOOD_WORD_LIMIT=20
-INSTAGRAM_POST_BAD_WORD_LIMIT=1
+INSTAGRAM_POST_BAD_WORD_LIMIT=2
 
 def get_instagram_post_caption(good_word_limit, bad_word_limit):
     '''
