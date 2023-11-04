@@ -7,4 +7,10 @@ sqlite3.exe
 
 # No love for pycache
 */__pycache__
+
+# Avoid syncing generated images
 folder_generated_images/*
+
+# Exclude Python virtualenv from being committed
+# Yeah, I virtualenv from this directory
+.venv/
