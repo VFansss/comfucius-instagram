@@ -36,12 +36,12 @@ def get_instagram_post_caption(good_word_limit, bad_word_limit):
     hashtags_good = []
     hashtags_bad = []
 
-    output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == 'good' ORDER BY RANDOM() LIMIT "+str(good_word_limit))
+    output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == ? ORDER BY RANDOM() LIMIT ?",('good',str(good_word_limit)))
 
     for single_row in output_obj.fetchall():
         hashtags_good.append('#'+single_row[0])
 
-    output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == 'bad' ORDER BY RANDOM() LIMIT "+str(bad_word_limit))
+    output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == ? ORDER BY RANDOM() LIMIT ?",('bad',str(bad_word_limit)))
 
     for single_row in output_obj.fetchall():
         hashtags_good.append('#'+single_row[0])
