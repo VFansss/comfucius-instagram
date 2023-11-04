@@ -25,7 +25,7 @@ INSTAGRAM_PASSWORD=os.environ.get('INSTAGRAM_PASSWORD')
 INSTAGRAM_POST_GOOD_WORD_LIMIT=20
 INSTAGRAM_POST_BAD_WORD_LIMIT=2
 
-def get_instagram_post_caption(good_word_limit, bad_word_limit):
+def generate_instagram_post_caption(good_word_limit, bad_word_limit):
     '''
     Get instagram caption concatenating a series of "good word" hashtags (e.g. philosophy, love)
     and a series of "bad" ones (e.g. atomicbomb, backache)
@@ -48,7 +48,7 @@ def get_instagram_post_caption(good_word_limit, bad_word_limit):
 
     return (f'{" ".join(hashtags_good)}{" ".join(hashtags_bad)}')
 
-def post_photo_on_instagram(image_path, post_caption, accessibility_caption):
+def create_post_on_instagram(image_path, post_caption, accessibility_caption):
     '''
     Post a .jpg image on instagram as a photo post. Use data generated early
     Instaclient doc URL: https://adw0rd.github.io/instagrapi/usage-guide/media.html
@@ -99,14 +99,14 @@ if __name__ == "__main__":
 
     # Generate a cool caption
 
-    generated_post_caption = get_instagram_post_caption(
+    generated_post_caption = generate_instagram_post_caption(
         good_word_limit=INSTAGRAM_POST_GOOD_WORD_LIMIT, 
         bad_word_limit=INSTAGRAM_POST_BAD_WORD_LIMIT
     )
 
     # Post on Instagram, if "DRY_RUN_ENABLED" is True
 
-    post_result_info = post_photo_on_instagram(
+    post_result_info = create_post_on_instagram(
         image_path=generated_image_path,
         post_caption=generated_post_caption,
         accessibility_caption=comfucius_complete_quote
