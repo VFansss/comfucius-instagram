@@ -6,6 +6,11 @@ import random
 from instagrapi import Client
 from datetime import datetime
 from image_generator.generate_image import generate_image
+from dotenv import load_dotenv
+
+# Load .env file, if present
+
+load_dotenv()
 
 DRY_RUN_ENABLED=True
 
