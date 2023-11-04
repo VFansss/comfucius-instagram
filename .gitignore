@@ -6,7 +6,7 @@ sqlite3.exe
 *.sqlite
 
 # No love for pycache
-*/__pycache__
+**/__pycache__
 
 # Avoid syncing generated images
 folder_generated_images/*
