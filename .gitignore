@@ -2,7 +2,7 @@
 sqlite3.exe
 
 # Avoid syncing any SQLite database. You need one for your application
-# but create it from "flat_file_database.csv". Check instruction within.
+# but create it from "flat_file_database.csv". Check instruction within or README.md
 *.sqlite
 
 # No love for pycache
@@ -14,3 +14,6 @@ folder_generated_images/*
 # Exclude Python virtualenv from being committed
 # Yeah, I virtualenv from this directory
 .venv/
+
+# Avoid committing Instagram cookie dump used by instagrapi
+dump.json
