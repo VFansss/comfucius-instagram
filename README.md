@@ -1,8 +1,8 @@
 # comfucius-instagram
 
-The software I use for posting ~~spam~~ beautiful motivational poster on our ~~preferred social network~~ Instagram.
+The software I use for ~~spamming~~ posting beautiful motivational poster on ~~our preferred social network~~ Instagram.
 
-Motivational poster are made using fake quote phrase from [Comfucius website](https://comfucius.xyz) in that moment, and a list of "weird" hashtag taken from a local SQLite database.
+Posters are made using quote of that moment from [Comfucius website](https://comfucius.xyz) and a list of "weird" hashtag taken from a local SQLite database.
 
 ![Example](.assets/sei-mejo-poster.jpg)
 
