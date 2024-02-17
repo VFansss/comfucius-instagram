@@ -1,3 +1,6 @@
+# Just VS Code things...
+.vscode/
+
 # Yes, I've copied windows SQLite inside the project. Don't do that!
 sqlite3.exe
 
