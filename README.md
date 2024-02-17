@@ -4,7 +4,9 @@ The software I use for ~~spamming~~ posting beautiful motivational poster on ~~o
 
 Posters are made using quote of that moment from [Comfucius website](https://comfucius.xyz) and a list of "weird" hashtag taken from a local SQLite database.
 
-![Example](.assets/sei-mejo-poster.jpg)
+Is then posted on [Comfucius official page on Instagram](https://www.instagram.com/comfucius_official/).
+
+<img src=".assets/sei-mejo-poster.jpg" width="400">
 
 ## Deploy instruction
 
