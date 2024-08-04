@@ -22,6 +22,9 @@ COMFUCIUS_GET_PHRASE_PUBLIC_API_URL = 'https://comfucius.xyz/quotes/api/get-fake
 INSTAGRAM_USERNAME=os.environ.get('INSTAGRAM_USERNAME')
 INSTAGRAM_PASSWORD=os.environ.get('INSTAGRAM_PASSWORD')
 
+# Post on Instagram only if "False" is set by user, case insensitive
+DRY_RUN_ENABLED = os.environ.get('DRY_RUN_ENABLED', 'True').lower() != 'false'
+
 INSTAGRAM_POST_GOOD_WORD_LIMIT=20
 INSTAGRAM_POST_BAD_WORD_LIMIT=2
 
