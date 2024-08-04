@@ -19,4 +19,4 @@ folder_generated_images/*
 .venv/
 
 # Avoid committing Instagram cookie dump used by instagrapi
-dump.json
+session.json

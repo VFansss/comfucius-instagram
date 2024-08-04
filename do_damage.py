@@ -64,7 +64,11 @@ def create_post_on_instagram(image_path, post_caption, accessibility_caption):
     else:
 
         instaclient = Client()
-        instaclient.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
+
+        if os.path.exists('session.json'):
+            instaclient.load_settings("session.json")
+        else:
+            instaclient.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
 
         media = instaclient.photo_upload(
             image_path,
