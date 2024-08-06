@@ -6,6 +6,7 @@ import random
 from instagrapi import Client
 from datetime import datetime
 from image_generator.generate_image import generate_image
+from phrase_word_scoring.score_phrase_words import extract_top_words
 from dotenv import load_dotenv
 
 # Load .env file, if present
@@ -25,10 +26,12 @@ INSTAGRAM_PASSWORD=os.environ.get('INSTAGRAM_PASSWORD')
 # Post on Instagram only if "False" is set by user, case insensitive
 DRY_RUN_ENABLED = os.environ.get('DRY_RUN_ENABLED', 'True').lower() != 'false'
 
-INSTAGRAM_POST_GOOD_WORD_LIMIT=20
-INSTAGRAM_POST_BAD_WORD_LIMIT=3
+# If any of these is 0, don't use that feature
+INSTAGRAM_POST_TOP_WORDS_LIMIT=3
+INSTAGRAM_POST_GOOD_WORD_LIMIT=10
+INSTAGRAM_POST_BAD_WORD_LIMIT=4
 
-def generate_instagram_post_caption(good_word_limit, bad_word_limit):
+def generate_instagram_post_caption(phrase, top_words_tag_limit, good_words_tag_limit, bad_words_tag_limit):
     '''
     Get instagram caption concatenating a series of "good word" hashtags (e.g. philosophy, love)
     and a series of "bad" ones (e.g. atomicbomb, backache)
@@ -36,20 +39,34 @@ def generate_instagram_post_caption(good_word_limit, bad_word_limit):
 
     sqlite_db = sqlite3.connect("database.sqlite")
 
-    hashtags_good = []
-    hashtags_bad = []
+    hashtag_words = []
 
-    output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == ? ORDER BY RANDOM() LIMIT ?",('good',str(good_word_limit)))
+    if top_words_tag_limit:
 
-    for single_row in output_obj.fetchall():
-        hashtags_good.append('#'+single_row[0])
+        # Remove too short words in phrase
+        filtered_words = ' '.join([single_phase_word for single_phase_word in phrase.split() if len(single_phase_word) >= 3])
+        
+        top_words_in_phrase = extract_top_words(filtered_words, top_words_number=top_words_tag_limit)
 
-    output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == ? ORDER BY RANDOM() LIMIT ?",('bad',str(bad_word_limit)))
+        hashtag_words.extend(top_words_in_phrase)
 
-    for single_row in output_obj.fetchall():
-        hashtags_good.append('#'+single_row[0])
+    if good_words_tag_limit:
+        
+        output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == ? ORDER BY RANDOM() LIMIT ?",('good',str(good_words_tag_limit)))
+        
+        for single_row in output_obj.fetchall():
 
-    return (f'{" ".join(hashtags_good)}{" ".join(hashtags_bad)}')
+            hashtag_words.append(single_row[0])
+
+    if bad_words_tag_limit:
+
+        output_obj = sqlite_db.execute("SELECT word FROM hashtag WHERE type == ? ORDER BY RANDOM() LIMIT ?",('bad',str(bad_words_tag_limit)))
+
+        for single_row in output_obj.fetchall():
+
+            hashtag_words.append(single_row[0])
+
+    return ' '.join(f'#{single_word}' for single_word in hashtag_words)
 
 def create_post_on_instagram(image_path, post_caption, accessibility_caption):
     '''
@@ -107,8 +124,10 @@ if __name__ == "__main__":
     # Generate a cool caption
 
     generated_post_caption = generate_instagram_post_caption(
-        good_word_limit=INSTAGRAM_POST_GOOD_WORD_LIMIT, 
-        bad_word_limit=INSTAGRAM_POST_BAD_WORD_LIMIT
+        phrase=comfucius_phrase_data["Phrase"],
+        top_words_tag_limit=INSTAGRAM_POST_TOP_WORDS_LIMIT,
+        good_words_tag_limit=INSTAGRAM_POST_GOOD_WORD_LIMIT, 
+        bad_words_tag_limit=INSTAGRAM_POST_BAD_WORD_LIMIT
     )
 
     # Post on Instagram, if "DRY_RUN_ENABLED" is True

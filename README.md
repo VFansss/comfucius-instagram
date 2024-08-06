@@ -11,7 +11,9 @@ Images are then posted by the script on [Comfucius official page on Instagram](h
 ## Deploy instruction
 
 1. Install python 3
-   - Tested version: Python 3.10.2
+   - Tested with:
+     - Python 3.9
+     - Python 3.10.2
 2. Install python dependencies
    1. (Optional but suggested) - Use venv (virtualenv) to create a virtual python env
    2. `cd` into project root folder and do `pip install -r requirements.txt`
