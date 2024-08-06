@@ -28,7 +28,7 @@ DRY_RUN_ENABLED = os.environ.get('DRY_RUN_ENABLED', 'True').lower() != 'false'
 
 # If any of these is 0, don't use that feature
 INSTAGRAM_POST_TOP_WORDS_LIMIT=3
-INSTAGRAM_POST_GOOD_WORD_LIMIT=10
+INSTAGRAM_POST_GOOD_WORD_LIMIT=15
 INSTAGRAM_POST_BAD_WORD_LIMIT=4
 
 def generate_instagram_post_caption(phrase, top_words_tag_limit, good_words_tag_limit, bad_words_tag_limit):
